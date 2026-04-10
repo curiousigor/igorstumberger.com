@@ -11,6 +11,11 @@
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.site-header:hover .site-header-image {
+  transform: rotate(-5deg) scale(1.08);
 }
 
 .site-header-info {

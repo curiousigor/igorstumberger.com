@@ -289,11 +289,14 @@ img {
   object-fit: cover;
   border-radius: 4px;
   flex-shrink: 0;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transform-origin: left center;
 }
 
 .book-card:hover .book-cover {
-  transform: scale(1.05);
+  transform: perspective(300px) rotateY(-15deg);
+  box-shadow: 6px 2px 12px rgba(0, 0, 0, 0.4);
 }
 
 .book-card-info {
