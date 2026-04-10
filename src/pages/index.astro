@@ -2,6 +2,12 @@
 import Base from "../layouts/Base.astro";
 import "../styles/global.css";
 import "../styles/blog.css";
+import { loadBooks, getCurrentlyReading, getRecentlyRead } from "../data/books";
+
+const bookFiles = import.meta.glob("../content/books/*.md", { eager: true });
+const allBooks = loadBooks(bookFiles);
+const currentlyReading = getCurrentlyReading(allBooks);
+const recentlyRead = getRecentlyRead(allBooks);
 
 const postFiles = import.meta.glob(["./blog/*.md", "!./blog/_*.md"], { eager: true });
 const recentPosts = Object.values(postFiles)
@@ -188,6 +194,46 @@ const projects = [
         <a href="/blog" class="blog-view-all">All posts →</a>
       </section>
     )}
+
+    <section class="section">
+      <span class="section-label">Books</span>
+      {currentlyReading.length > 0 && (
+        <div class="books-group">
+          <span class="books-subtitle">Currently reading</span>
+          <div class="books-cards">
+            {currentlyReading.map((book) => (
+              <div class="book-card">
+                <img src={book.cover} alt={book.title} class="book-cover" loading="lazy" decoding="async" />
+                <div class="book-card-info">
+                  <span class="book-card-title">{book.title}</span>
+                  <span class="book-card-author">{book.author}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {recentlyRead.length > 0 && (
+        <div class="books-group">
+          <span class="books-subtitle">Recently read</span>
+          <div class="books-cards">
+            {recentlyRead.map((book) => (
+              <div class="book-card">
+                <img src={book.cover} alt={book.title} class="book-cover" loading="lazy" decoding="async" />
+                <div class="book-card-info">
+                  <span class="book-card-title">{book.title}</span>
+                  <span class="book-card-author">{book.author}</span>
+                  {book.rating && (
+                    <span class="book-rating">{"★".repeat(book.rating)}{"☆".repeat(5 - book.rating)}</span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      <a href="/books" class="blog-view-all">All books →</a>
+    </section>
 
     <section class="section">
       <div class="reach-out-header">

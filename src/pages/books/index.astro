@@ -1,0 +1,98 @@
+---
+import Base from "../../layouts/Base.astro";
+import "../../styles/global.css";
+import "../../styles/blog.css";
+import { loadBooks, getCurrentlyReading, getRecentlyRead, getReadBooks } from "../../data/books";
+
+const bookFiles = import.meta.glob("../../content/books/*.md", { eager: true });
+const allBooks = loadBooks(bookFiles);
+const currentlyReading = getCurrentlyReading(allBooks);
+const recentlyRead = getRecentlyRead(allBooks);
+const readBooks = getReadBooks(allBooks);
+const olderBooks = readBooks.slice(2);
+---
+
+<Base
+  title="Books — Igor Štumberger"
+  description="What I'm reading and books I'd recommend."
+>
+  <div class="container">
+    <header class="site-header">
+      <img src="/images/igor.webp" alt="Igor Štumberger" width="40" height="40" class="site-header-image" />
+      <div class="site-header-info">
+        <a href="/" class="site-header-name">Igor Štumberger ↗</a>
+        <span class="site-header-title">Design Engineer</span>
+      </div>
+    </header>
+
+    <section class="section">
+      <span class="section-label">Books</span>
+
+      {currentlyReading.length > 0 && (
+        <div class="books-group">
+          <span class="books-subtitle">Currently reading</span>
+          <div class="books-cards">
+            {currentlyReading.map((book) => (
+              <div class="book-card">
+                <img src={book.cover} alt={book.title} class="book-cover" loading="lazy" decoding="async" />
+                <div class="book-card-info">
+                  <span class="book-card-title">{book.title}</span>
+                  <span class="book-card-author">{book.author}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {recentlyRead.length > 0 && (
+        <div class="books-group">
+          <span class="books-subtitle">Recently read</span>
+          <div class="books-cards">
+            {recentlyRead.map((book) => (
+              <div class="book-card">
+                <img src={book.cover} alt={book.title} class="book-cover" loading="lazy" decoding="async" />
+                <div class="book-card-info">
+                  <span class="book-card-title">{book.title}</span>
+                  <span class="book-card-author">{book.author}</span>
+                  {book.rating && (
+                    <span class="book-rating">{"★".repeat(book.rating)}{"☆".repeat(5 - book.rating)}</span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {olderBooks.length > 0 && (
+        <div class="books-group">
+          <span class="books-subtitle">Reading log</span>
+          <div class="books-log">
+            {olderBooks.map((book) => (
+              <div class="book-log-item">
+                <div class="book-log-info">
+                  <span class="book-log-title">{book.title}</span>
+                  <span class="book-log-author">{book.author}</span>
+                </div>
+                <div class="book-log-meta">
+                  {book.rating && (
+                    <span class="book-log-rating">{"★".repeat(book.rating)}{"☆".repeat(5 - book.rating)}</span>
+                  )}
+                  {book.dateRead && (
+                    <time class="book-log-date" datetime={book.dateRead}>
+                      {new Date(book.dateRead).toLocaleDateString("en-GB", {
+                        year: "numeric",
+                        month: "short",
+                      })}
+                    </time>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </section>
+  </div>
+</Base>
