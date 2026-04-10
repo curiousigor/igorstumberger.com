@@ -63,5 +63,27 @@ const socialImage = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/images/meta-i
   </head>
   <body>
     <slot />
+    <script>
+      console.log(
+        "%c\n" +
+        "  _   _ _   _    ___  _   _ _ \n" +
+        " | | | | | | |  / _ \\| | | | |\n" +
+        " | | | | |_| | | | | | |_| | |\n" +
+        " | |_| |  _  | | |_| |  _  |_|\n" +
+        "  \\___/|_| |_|  \\___/|_| |_(_)\n",
+        "color: #ffe11b; font-family: monospace;"
+      );
+      console.log(
+        "%cYou found the secret room. %c\n\n" +
+        "I see you like to peek under the hood — me too.\n" +
+        "This site is built with Astro, plain CSS, and zero frameworks.\n" +
+        "No cookies. Just pixels and care.\n\n" +
+        "If you're a designer, developer, or just curious:\n" +
+        "→ hi@igorstumberger.com\n" +
+        "→ bsky.app/profile/igorstumberger.com\n",
+        "color: #ffe11b; font-size: 13px; font-weight: bold;",
+        "color: #fff; font-size: 12px; line-height: 1.6;"
+      );
+    </script>
   </body>
 </html>
