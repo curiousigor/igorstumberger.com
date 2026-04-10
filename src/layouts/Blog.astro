@@ -1,0 +1,35 @@
+---
+import Base from "./Base.astro";
+import "../styles/global.css";
+import "../styles/blog.css";
+
+interface Props {
+  frontmatter: {
+    title: string;
+    date: string;
+    description: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+const formattedDate = new Date(frontmatter.date).toLocaleDateString("en-GB", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<Base title={`${frontmatter.title} — Igor Štumberger`} description={frontmatter.description}>
+  <div class="container">
+    <article class="blog-post">
+      <header class="blog-post-header">
+        <a href="/blog" class="blog-back-link">← Blog</a>
+        <h1 class="blog-post-title">{frontmatter.title}</h1>
+        <time class="blog-post-date" datetime={frontmatter.date}>{formattedDate}</time>
+      </header>
+      <div class="blog-post-content">
+        <slot />
+      </div>
+    </article>
+  </div>
+</Base>

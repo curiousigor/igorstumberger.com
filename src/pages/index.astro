@@ -1,0 +1,186 @@
+---
+import Base from "../layouts/Base.astro";
+import "../styles/global.css";
+
+const projects = [
+  {
+    name: "Hey MEta",
+    description:
+      "Meta tag management reimagined with real-time previews and instant implementation. Turning SEO from a chore into a superpower.",
+    meta: "40.000+ Monthly Active Users",
+    image: "/images/heymeta.webp",
+    imageWidth: 1360,
+    imageHeight: 900,
+    link: "https://heymeta.com/",
+    linkText: "Visit website",
+    full: true,
+  },
+  {
+    name: "Dockey for macOS",
+    description:
+      "Visual controls and live previews replace terminal commands for macOS Dock customization. Making advanced system preferences feel naturally intuitive.",
+    meta: "700+ Downloads per Month",
+    image: "/images/dockey.webp",
+    imageWidth: 1360,
+    imageHeight: 900,
+    link: "https://dockey.publicspace.co/",
+    linkText: "Download for free",
+  },
+  {
+    name: "Public Space",
+    description:
+      "A space for creators to connect, validate concepts, and build better together. Where supportive conversations spark innovative projects.",
+    meta: "Registrations closed",
+    image: "/images/publicspace.webp",
+    imageWidth: 1360,
+    imageHeight: 900,
+    link: "https://publicspace.co/",
+    linkText: "Visit website",
+  },
+  {
+    name: "3fs Cybersecurity",
+    description:
+      "Complex cybersecurity services presented through a sleek, user-friendly interface. Making digital protection clear and accessible with a single click.",
+    meta: "Designed and coded",
+    image: "/images/cybersecurity.webp",
+    imageWidth: 1360,
+    imageHeight: 900,
+    link: "https://3fs.cloud/cybersecurity",
+    linkText: "Visit website",
+  },
+  {
+    name: "adidas Train & Run",
+    description:
+      "Your smartphone transformed into a personal trainer with real-time coaching and feedback. Tracking every metric on your fitness journey.",
+    meta: "Replaced by Adidas Running",
+    image: "/images/adidas.webp",
+    imageWidth: 1360,
+    imageHeight: 900,
+    link: "https://appadvice.com/app/adidas-train-run/383809424",
+    linkText: "Discover more",
+  },
+  {
+    name: "Fehta Tofu & Tempeh",
+    description:
+      "Busting myths about bland plant-based foods with crave-worthy tofu and tempeh recipes. Making 'health food' actually delicious and approachable.",
+    meta: "Sold across Slovenia",
+    image: "/images/fehta.webp",
+    imageWidth: 1360,
+    imageHeight: 900,
+    link: "https://fehta.com/",
+    linkText: "Visit website",
+  },
+  {
+    name: "Your next project",
+    description:
+      "Looking for a designer who turns complex challenges into elegant solutions? Let's create something remarkable together.",
+    meta: "Me + Your team = <3",
+    image: "/images/work.svg",
+    imageWidth: 272,
+    imageHeight: 180,
+    link: "mailto:hi@igorstumberger.com?subject=I+want+to+work+with+you%21",
+    linkText: "Reach out over email",
+    selfTarget: true,
+  },
+];
+---
+
+<Base
+  title="Igor Štumberger"
+  description="I spend my days designing products people genuinely want to use, teaming up with smart people who care about making things better."
+>
+  <div class="container">
+    <section class="hero">
+      <div class="hero-content">
+        <h1 class="hero-name">Igor Štumberger</h1>
+        <p class="hero-title">
+          Senior Product Designer<br />with a love for code and technology
+        </p>
+        <p class="hero-description">
+          I spend my days designing products people genuinely want to use,
+          teaming up with smart people who care about making things better.
+        </p>
+        <p class="hero-description">
+          Comfortable in both <strong>design</strong> and
+          <strong>development</strong>, I turn ideas into reality through
+          careful <strong>attention to detail</strong> and
+          <strong>a dash of creative code</strong>.
+        </p>
+      </div>
+      <img
+        src="/images/igor.webp"
+        alt="Igor Štumberger"
+        width="680"
+        height="680"
+        class="hero-image"
+        decoding="async"
+        loading="lazy"
+      />
+    </section>
+
+    <section class="section">
+      <span class="section-label">Projects</span>
+      <div class="projects-grid">
+        {
+          projects.map((project) => (
+            <article
+              class:list={[
+                "project-card",
+                { "project-card--full": project.full },
+              ]}
+            >
+              <div class="project-card-inner">
+                <img
+                  src={project.image}
+                  alt={project.name}
+                  width={project.imageWidth}
+                  height={project.imageHeight}
+                  decoding="async"
+                  loading="lazy"
+                />
+                <div class="project-info">
+                  <h2 class="project-name">{project.name}</h2>
+                  <p class="project-description">{project.description}</p>
+                  <p class="project-meta">{project.meta}</p>
+                </div>
+              </div>
+              <a
+                href={project.link}
+                target={project.selfTarget ? "_self" : "_blank"}
+                class="project-link"
+              >
+                {project.linkText} ↗
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="reach-out-header">
+        <span class="section-label">Reach out</span>
+        <p class="reach-out-text">
+          You can always reach out with questions about my projects or work
+          process. If you're just starting out in design and need help or
+          guidance, shoot me a message and we'll talk it through. Or just say
+          hi.
+        </p>
+      </div>
+      <nav class="footer-links">
+        <a href="mailto:hi@igorstumberger.com" class="footer-link">EMAIL</a>
+        <a
+          href="https://www.linkedin.com/in/igorstumberger/"
+          target="_blank"
+          class="footer-link">Linkedin</a
+        >
+        <a href="https://read.cv/curious" target="_blank" class="footer-link"
+          >CV</a
+        >
+        <a href="https://posts.cv/curious" target="_blank" class="footer-link"
+          >Posts</a
+        >
+      </nav>
+    </section>
+  </div>
+</Base>

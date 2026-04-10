@@ -1,0 +1,65 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const siteUrl = "https://igorstumberger.com";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={title} />
+    <meta property="og:image" content={`${siteUrl}/images/meta-img.webp`} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}/images/meta-img.webp`} />
+
+    <link rel="icon" href="/favicon.ico" />
+
+    <link
+      rel="preload"
+      href="/fonts/SpaceGrotesk-Variable.ttf"
+      as="font"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="/fonts/SpaceMono-Regular.ttf"
+      as="font"
+      crossorigin="anonymous"
+    />
+    <link rel="preload" href="/images/background.webp" as="image" />
+
+    <script
+      defer
+      data-domain="igorstumberger.com"
+      src="https://plausible.hey.si/js/script.hash.outbound-links.js"></script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Igor Štumberger",
+        "url": "https://igorstumberger.com"
+      }
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

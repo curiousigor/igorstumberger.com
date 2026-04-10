@@ -1,0 +1,266 @@
+/* Fonts */
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/SpaceGrotesk-Variable.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Space Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/SpaceMono-Regular.ttf") format("truetype");
+}
+
+/* Design tokens */
+:root {
+  --color-bg: #000;
+  --color-text: #fff;
+  --color-accent: #ffe11b;
+  --color-muted: rgba(255, 255, 255, 0.5);
+  --color-border: rgba(255, 255, 255, 0.21);
+  --color-border-hover: #ffe11c;
+  --color-button-bg: rgba(46, 46, 46, 0.5);
+
+  --font-sans: "Space Grotesk", sans-serif;
+  --font-mono: "Space Mono", monospace;
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+
+  --transition: 0.2s ease;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base */
+html {
+  font-size: 16px;
+  line-height: 1.2;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  background-image: url("/images/background.webp");
+  background-position: 50% 0%;
+  background-size: 100vw auto;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}
+
+/* Layout */
+.container {
+  max-width: 43em;
+  margin: 0 auto;
+  padding: 48px 0;
+}
+
+/* Section */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+}
+
+/* Hero */
+.hero {
+  display: flex;
+  gap: 24px;
+  align-items: start;
+  padding: 24px;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hero-name {
+  font-size: 24px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.hero-title {
+  font-size: 24px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.hero-description {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.hero-image {
+  max-width: 33%;
+  flex-shrink: 0;
+}
+
+/* Section label (e.g. "Projects", "Reach out") */
+.section-label {
+  font-size: 14px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* Projects grid */
+.projects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 16px;
+  align-items: start;
+}
+
+/* Project card */
+.project-card {
+  width: 49%;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.project-card--full {
+  width: 100%;
+}
+
+.project-card-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+}
+
+.project-card img {
+  width: 100%;
+  border-radius: var(--radius-sm);
+}
+
+.project-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+}
+
+.project-name {
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.project-description {
+  font-size: 14px;
+}
+
+.project-meta {
+  font-size: 14px;
+  color: var(--color-muted);
+}
+
+.project-link {
+  display: block;
+  color: var(--color-accent);
+  font-size: 12px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-style: normal;
+  text-align: center;
+  padding: 8px 16px;
+  background-color: var(--color-button-bg);
+  border-top: 1px solid rgb(45, 45, 45);
+  transition: letter-spacing var(--transition);
+}
+
+.project-link:hover {
+  letter-spacing: 0.2px;
+}
+
+/* Footer / reach out */
+.reach-out-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.reach-out-text {
+  font-size: 14px;
+}
+
+.footer-links {
+  display: flex;
+  column-gap: 40px;
+  row-gap: 40px;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  transition: border-color var(--transition);
+  border-bottom: 1px solid rgba(255, 225, 28, 0.5);
+}
+
+.footer-link:hover {
+  border-bottom-color: var(--color-border-hover);
+}
+
+/* Bold accent */
+strong {
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  body {
+    background-position-y: 0%;
+  }
+
+  .hero {
+    flex-direction: column-reverse;
+  }
+
+  .project-card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 479px) {
+  .section,
+  .hero {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .footer-links {
+    justify-content: space-between;
+    column-gap: 0;
+    row-gap: 0;
+  }
+}

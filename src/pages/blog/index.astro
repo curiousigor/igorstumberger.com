@@ -1,0 +1,43 @@
+---
+import Base from "../../layouts/Base.astro";
+import "../../styles/global.css";
+import "../../styles/blog.css";
+
+const postFiles = import.meta.glob("./*.md", { eager: true });
+const posts = Object.values(postFiles)
+  .map((post: any) => ({
+    url: post.url,
+    title: post.frontmatter.title,
+    date: post.frontmatter.date,
+  }))
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+---
+
+<Base
+  title="Blog — Igor Štumberger"
+  description="Thoughts on design, development, and building products."
+>
+  <div class="container">
+    <section class="section">
+      <span class="section-label">Blog</span>
+      <div class="blog-list">
+        {
+          posts.map((post) => (
+            <div class="blog-item">
+              <a href={post.url} class="blog-item-title">
+                {post.title}
+              </a>
+              <time class="blog-item-date" datetime={post.date}>
+                {new Date(post.date).toLocaleDateString("en-GB", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </time>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+</Base>
