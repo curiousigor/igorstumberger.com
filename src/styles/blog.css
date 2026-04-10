@@ -72,6 +72,11 @@
   white-space: nowrap;
 }
 
+.blog-empty {
+  font-size: 14px;
+  color: var(--color-muted);
+}
+
 .blog-view-all {
   font-size: 14px;
   color: var(--color-muted);

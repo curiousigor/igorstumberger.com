@@ -27,9 +27,9 @@ const posts = Object.values(postFiles)
     </header>
     <section class="section">
       <span class="section-label">Writing</span>
-      <div class="blog-list">
-        {
-          posts.map((post) => (
+      {posts.length > 0 ? (
+        <div class="blog-list">
+          {posts.map((post) => (
             <a href={post.url} class="blog-item">
               <span class="blog-item-title">
                 {post.title}
@@ -42,9 +42,11 @@ const posts = Object.values(postFiles)
                 })}
               </time>
             </a>
-          ))
-        }
-      </div>
+          ))}
+        </div>
+      ) : (
+        <p class="blog-empty">Nothing here yet. Check back soon.</p>
+      )}
     </section>
   </div>
 </Base>
