@@ -143,6 +143,12 @@ img {
   overflow: hidden;
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
+  transition: border-color var(--transition), transform 0.3s ease;
+}
+
+.project-card:hover {
+  border-color: var(--color-border-hover);
+  transform: translateY(-2px);
 }
 
 .project-card--full {

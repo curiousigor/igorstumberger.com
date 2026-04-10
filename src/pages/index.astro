@@ -3,7 +3,7 @@ import Base from "../layouts/Base.astro";
 import "../styles/global.css";
 import "../styles/blog.css";
 
-const postFiles = import.meta.glob("./blog/*.md", { eager: true });
+const postFiles = import.meta.glob(["./blog/*.md", "!./blog/_*.md"], { eager: true });
 const recentPosts = Object.values(postFiles)
   .map((post: any) => ({
     url: post.url,
@@ -170,13 +170,13 @@ const projects = [
 
     {recentPosts.length > 0 && (
       <section class="section">
-        <span class="section-label">Blog</span>
+        <span class="section-label">Writing</span>
         <div class="blog-list">
           {recentPosts.map((post) => (
-            <div class="blog-item">
-              <a href={post.url} class="blog-item-title">
+            <a href={post.url} class="blog-item">
+              <span class="blog-item-title">
                 {post.title}
-              </a>
+              </span>
               <time class="blog-item-date" datetime={post.date}>
                 {new Date(post.date).toLocaleDateString("en-GB", {
                   year: "numeric",
@@ -184,7 +184,7 @@ const projects = [
                   day: "numeric",
                 })}
               </time>
-            </div>
+            </a>
           ))}
         </div>
         <a href="/blog" class="blog-view-all">All posts →</a>

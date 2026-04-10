@@ -2,10 +2,12 @@
 interface Props {
   title: string;
   description: string;
+  ogImage?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, ogImage } = Astro.props;
 const siteUrl = "https://igorstumberger.com";
+const socialImage = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/images/meta-img.webp`;
 ---
 
 <!doctype html>
@@ -22,12 +24,12 @@ const siteUrl = "https://igorstumberger.com";
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={title} />
-    <meta property="og:image" content={`${siteUrl}/images/meta-img.webp`} />
+    <meta property="og:image" content={socialImage} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`${siteUrl}/images/meta-img.webp`} />
+    <meta name="twitter:image" content={socialImage} />
 
     <link rel="icon" href="/favicon.ico" />
 
