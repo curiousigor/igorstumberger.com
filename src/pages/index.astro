@@ -1,6 +1,17 @@
 ---
 import Base from "../layouts/Base.astro";
 import "../styles/global.css";
+import "../styles/blog.css";
+
+const postFiles = import.meta.glob("./blog/*.md", { eager: true });
+const recentPosts = Object.values(postFiles)
+  .map((post: any) => ({
+    url: post.url,
+    title: post.frontmatter.title,
+    date: post.frontmatter.date,
+  }))
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  .slice(0, 3);
 
 const projects = [
   {
@@ -156,6 +167,29 @@ const projects = [
         }
       </div>
     </section>
+
+    {recentPosts.length > 0 && (
+      <section class="section">
+        <span class="section-label">Blog</span>
+        <div class="blog-list">
+          {recentPosts.map((post) => (
+            <div class="blog-item">
+              <a href={post.url} class="blog-item-title">
+                {post.title}
+              </a>
+              <time class="blog-item-date" datetime={post.date}>
+                {new Date(post.date).toLocaleDateString("en-GB", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </time>
+            </div>
+          ))}
+        </div>
+        <a href="/blog" class="blog-view-all">All posts →</a>
+      </section>
+    )}
 
     <section class="section">
       <div class="reach-out-header">

@@ -8,6 +8,7 @@ interface Props {
     title: string;
     date: string;
     description: string;
+    image?: string;
   };
 }
 
@@ -21,15 +22,34 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString("en-GB", {
 
 <Base title={`${frontmatter.title} — Igor Štumberger`} description={frontmatter.description}>
   <div class="container">
+    <header class="site-header">
+      <img src="/images/igor.webp" alt="Igor Štumberger" width="40" height="40" class="site-header-image" />
+      <div class="site-header-info">
+        <a href="/" class="site-header-name">Igor Štumberger ↗</a>
+        <span class="site-header-title">Senior Product Designer</span>
+      </div>
+    </header>
     <article class="blog-post">
       <header class="blog-post-header">
         <a href="/blog" class="blog-back-link">← Blog</a>
         <h1 class="blog-post-title">{frontmatter.title}</h1>
         <time class="blog-post-date" datetime={frontmatter.date}>{formattedDate}</time>
+        {frontmatter.image && (
+          <img src={frontmatter.image} alt={frontmatter.title} class="blog-post-image" decoding="async" loading="lazy" />
+        )}
       </header>
       <div class="blog-post-content">
         <slot />
       </div>
+      <footer class="blog-post-footer">
+        <p class="blog-post-footer-text">Enjoyed this post? I'd love to hear from you.</p>
+        <a
+          href={`mailto:hi@igorstumberger.com?subject=Re: ${frontmatter.title}`}
+          class="blog-post-cta"
+        >
+          Get in touch ↗
+        </a>
+      </footer>
     </article>
   </div>
 </Base>
